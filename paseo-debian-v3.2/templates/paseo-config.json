@@ -1,0 +1,93 @@
+{
+  "$schema": "https://paseo.sh/schemas/paseo.config.v1.json",
+  "version": 1,
+  "daemon": {
+    "listen": "127.0.0.1:6767",
+    "hostnames": [
+      "localhost",
+      "127.0.0.1"
+    ],
+    "relay": {
+      "enabled": true,
+      "endpoint": "relay.paseo.sh:443",
+      "publicEndpoint": "relay.paseo.sh:443",
+      "useTls": true,
+      "publicUseTls": true
+    }
+  },
+  "worktrees": {
+    "root": "/srv/paseo/worktrees"
+  },
+  "features": {
+    "webUi": {
+      "enabled": false
+    },
+    "dictation": {
+      "enabled": false
+    },
+    "voiceMode": {
+      "enabled": false
+    }
+  },
+  "agents": {
+    "providers": {
+      "codex": {
+        "enabled": true,
+        "models": [
+          {
+            "id": "gpt-6-astra",
+            "label": "gpt-6-astra (HahaAPI)",
+            "isDefault": true,
+            "thinkingOptions": [
+              {
+                "id": "low",
+                "label": "Low"
+              },
+              {
+                "id": "medium",
+                "label": "Medium"
+              },
+              {
+                "id": "high",
+                "label": "High",
+                "isDefault": true
+              },
+              {
+                "id": "xhigh",
+                "label": "Extra High"
+              },
+              {
+                "id": "max",
+                "label": "Max"
+              }
+            ]
+          }
+        ]
+      },
+      "claude": {
+        "enabled": false
+      },
+      "copilot": {
+        "enabled": false
+      },
+      "opencode": {
+        "enabled": false
+      },
+      "pi": {
+        "enabled": false
+      },
+      "omp": {
+        "enabled": false
+      }
+    },
+    "metadataGeneration": {
+      "providers": [
+        {
+          "provider": "codex",
+          "model": "gpt-6-astra",
+          "thinkingOptionId": "high"
+        }
+      ]
+    }
+  }
+}

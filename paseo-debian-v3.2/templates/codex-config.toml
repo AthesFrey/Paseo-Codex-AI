@@ -1,0 +1,22 @@
+model = "gpt-6-astra"
+model_provider = "hahaapi"
+model_reasoning_effort = "high"
+approval_policy = "never"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ["/srv/proj", "/srv/paseo/worktrees", "/srv/paseo/tools", "/srv/paseo/cache"]
+exclude_slash_tmp = true
+exclude_tmpdir_env_var = true
+
+[shell_environment_policy]
+exclude = ["HAHA_API_KEY"]
+
+[model_providers.hahaapi]
+name = "HahaAPI"
+base_url = "https://sub2.hahaapi.com/v1"
+env_key = "HAHA_API_KEY"
+wire_api = "responses"
+requires_openai_auth = false
+supports_websockets = false
