@@ -1,0 +1,29 @@
+[Unit]
+Description=Paseo Relay daemon (Debian v3.3)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=paseo
+Group=paseo
+WorkingDirectory=/srv/proj
+EnvironmentFile=/etc/paseo/runtime.env
+EnvironmentFile=/etc/paseo/hahaapi.env
+ExecStart=/srv/paseo/runtime/node/bin/node --disable-warning=DEP0040 /srv/paseo/runtime/apps/node_modules/@getpaseo/cli/bin/paseo daemon start --foreground --home /srv/paseo/.paseo --listen 127.0.0.1:6767 --relay --relay-use-tls --no-web-ui
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/srv/paseo /srv/proj
+ReadOnlyPaths=/srv/paseo/runtime
+CapabilityBoundingSet=
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

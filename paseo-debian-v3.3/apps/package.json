@@ -1,0 +1,9 @@
+{
+  "name": "paseo-debian-runtime",
+  "version": "3.3.0",
+  "private": true,
+  "dependencies": {
+    "@getpaseo/cli": "0.8.0",
+    "@openai/codex": "0.154.0"
+  }
+}
