@@ -1,0 +1,23 @@
+model = "gpt-6-astra"
+model_provider = "hahaapi"
+model_reasoning_effort = "high"
+approval_policy = "never"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ["/srv/proj", "/srv/paseo/worktrees", "/srv/paseo/tools", "/srv/paseo/cache"]
+exclude_slash_tmp = true
+exclude_tmpdir_env_var = true
+
+[shell_environment_policy]
+filters = { HAHA_API_KEY = "exclude", BACKAPI_API_KEY = "exclude", OPENAI_API_KEY = "exclude" }
+
+[model_providers.hahaapi]
+name = "HahaAPI"
+# 02-configure.sh replaces this installation marker with the address entered at the terminal.
+base_url = "https://configure-during-install.invalid/v1"
+env_key = "HAHA_API_KEY"
+wire_api = "responses"
+requires_openai_auth = false
+supports_websockets = false
