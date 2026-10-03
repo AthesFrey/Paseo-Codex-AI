@@ -121,3 +121,33 @@ sudo bash /srv/paseo/deploy-kit/paseo-debian-20261002-v6.1fix2/99-uninstall.sh -
 - `templates/`：当前配置、systemd、环境和 Agent 模板
 - `VALIDATION.md`：交付验证记录
 - `SHA256SUMS`：逐文件 SHA256
+
+
+
+## 附件
+
+新增独立脚本 `98-update.sh`，用于在不重建 Paseo 配置和用户数据的情况下，单独更新 v6.1fix2 的运行时组件。
+
+### 98-update.sh
+
+运行方式：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/AthesFrey/Paseo-Codex-AI/main/paseo-debian-20261002-v6.1fix2/98-update.sh | sudo bash
+```
+
+功能与更新范围：
+
+- 从官方源将 Node.js、npm、Paseo CLI、Codex CLI 和 uv 强制更新到当前最新版。
+- 不执行 `01-install.sh`、`02-configure.sh` 或 `--force`，不会重建 Paseo 配置。
+- `/srv/proj` 中的项目、`/srv/paseo/worktrees` 中的工作区、模型配置、API key、systemd unit 和其他用户数据均保留；更新后原有 project 和 workspace 继续可用。
+- 通过 `curl | sudo bash` 直接运行，不读取 `/srv/paseo/deploy-kit` 中的任何 `paseo-debian-*` 工具包。
+- 不执行 `--force`、安装脚本或配置脚本，也不请求 `/v1/models`。
+
+更新流程：
+
+1. 先在 `/srv/paseo/cache/tmp` 中下载并校验 Node/npm、Paseo 和 uv。
+2. 在服务仍运行时完成 Codex 官方安装。
+3. 全部准备完成后，才停止服务并替换受管理的运行时目录。
+4. 替换或健康检查失败时，恢复旧运行时和 Codex 当前链接。
+5. 旧的项目与工作区从未作为更新对象处理。
