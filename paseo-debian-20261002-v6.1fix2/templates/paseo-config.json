@@ -1,0 +1,58 @@
+{
+  "$schema": "https://paseo.sh/schemas/paseo.config.v1.json",
+  "version": 1,
+  "daemon": {
+    "listen": "127.0.0.1:6767",
+    "hostnames": [
+      "localhost",
+      "127.0.0.1"
+    ],
+    "relay": {
+      "enabled": true,
+      "endpoint": "relay.paseo.sh:443",
+      "publicEndpoint": "relay.paseo.sh:443",
+      "useTls": true,
+      "publicUseTls": true
+    }
+  },
+  "worktrees": {
+    "root": "/srv/paseo/worktrees"
+  },
+  "features": {
+    "webUi": {
+      "enabled": false
+    },
+    "dictation": {
+      "enabled": false
+    },
+    "voiceMode": {
+      "enabled": false
+    }
+  },
+  "agents": {
+    "providers": {
+      "codex": {
+        "enabled": true,
+        "models": []
+      },
+      "claude": {
+        "enabled": false
+      },
+      "copilot": {
+        "enabled": false
+      },
+      "opencode": {
+        "enabled": false
+      },
+      "pi": {
+        "enabled": false
+      },
+      "omp": {
+        "enabled": false
+      }
+    },
+    "metadataGeneration": {
+      "providers": []
+    }
+  }
+}
