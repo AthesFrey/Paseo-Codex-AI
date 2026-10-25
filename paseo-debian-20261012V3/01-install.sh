@@ -68,6 +68,11 @@ managed_paths=(
   /srv/paseo/.profile
 )
 for path in "${managed_paths[@]}"; do
+  # Codex 官方 standalone 安装器会将此路径创建为命令入口符号链接。
+  # --force 模式会用 rm -f 仅移除链接本身，不跟随链接删除目标。
+  # 因此不要在通用托管路径检查中拒绝该入口；非 --force 模式仍由下方
+  # 的“已有托管路径”检查拦截，避免意外覆盖现有安装。
+  [[ "$path" == "$PASEO_CODEX_BIN" ]] && continue
   [[ ! -L "$path" ]] || {
     echo "托管路径不允许是符号链接：$path" >&2
     exit 1
