@@ -1,8 +1,0 @@
-{
-  "name": "paseo-debian-runtime",
-  "version": "2026.10.12-v3",
-  "private": true,
-  "dependencies": {
-    "@getpaseo/cli": "latest"
-  }
-}
